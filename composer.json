@@ -11,15 +11,16 @@
             "email": "nerd305@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
-        "php": "5.4.*"
+        "php": ">=5.4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable"
     },
     "autoload": {
-        "psr-4": {
-            "MarkHilton\\FormFields\\": "src/"
+        "psr-0": {
+            "FormFields": "src/"
         }
     }
 }
