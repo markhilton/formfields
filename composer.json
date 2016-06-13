@@ -8,7 +8,7 @@
     "authors" : [
         {
             "name": "Mark Hilton",
-            "email": "nerd305@gmail.com",
+            "email": "nerd305@gmail.com"
         }
     ],
     "require": {
@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "FormFields": "src/",
+            "MarkHilton\\FormFields\\": "src/"
         }
-    },
+    }
 }
