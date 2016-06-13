@@ -14,6 +14,9 @@
     "require": {
         "php": ">=5.4"
     },
+    "require-dev": {
+        "phpunit/phpunit": "@stable"
+    },
     "autoload": {
         "psr-4": {
             "MarkHilton\\FormFields\\": "src/"
