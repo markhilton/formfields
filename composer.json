@@ -1,7 +1,7 @@
 {
     "name": "markhilton/formfields",
     "type": "library",
-    "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
+    "description": "Laravel 5 form fields HTML generator sourced from Blade template engine views.",
     "keywords": ["HTML", "fields", "form", "forms", "templates"],
     "homepage": "http://github.com/markhilton/formfields",
     "license" : "MIT",
