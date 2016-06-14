@@ -11,9 +11,7 @@ class FormFieldsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-#		$this->app->package('markhilton/formfields', null, __DIR__);
-        // $this->app->alias('MarkHilton\FormFields\jsQueue',    'jsQueue');
-        // $this->app->alias('MarkHilton\FormFields\FormFields', 'FormFields');
+        $this->loadViewsFrom(__DIR__  .'/views',  'FormFields');
     }
 
     /**
@@ -23,8 +21,5 @@ class FormFieldsServiceProvider extends ServiceProvider
     {
 	    $this->app->alias('jsQueue', 	 'MarkHilton\FormFields\jsQueue');
 	    $this->app->alias('FormBuilder', 'MarkHilton\FormFields\FormBuilder');
-
-        // $this->app->alias('MarkHilton\FormFields\jsQueue',    'jsQueue');
-        // $this->app->alias('MarkHilton\FormFields\FormFields', 'FormFields');
     }
 }
