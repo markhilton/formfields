@@ -93,17 +93,17 @@ class SiteController extends Controller {
 
 ### View ###
 
-```<div class="row">
+<div class="row">
     {{ $status }}
 
     {{ $name }}
-</div>```
+</div>
 
 
 
 ### HTML output ###
 
-```<div class="row">
+<div class="row">
     <div>
         <select id="field-status" class="width100p" name="status" data-placeholder="">
             <option selected="selected" value="active">Active</option>
@@ -118,7 +118,7 @@ class SiteController extends Controller {
             <input type="text" name="name" value="" class="form-control" />
         </div>
     </div>
-</div>```
+</div>
 
 
 
