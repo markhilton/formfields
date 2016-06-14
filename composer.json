@@ -18,7 +18,7 @@
         "phpunit/phpunit": "@stable"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "MarkHilton\\FormFields\\": "src/"
         }
     }

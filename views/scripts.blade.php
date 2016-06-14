@@ -1,0 +1,3 @@
+<script>
+@stack('script')
+</script>
