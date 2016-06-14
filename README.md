@@ -85,7 +85,7 @@ class SiteController extends Controller {
     {
         $form = \FormBuilder::build(Your_Model_Name::$form, $request->old() ? $request->old() : []),
 
-        return view('layouts.authorized', $form);
+        return view('layout', $form);
 
     // ... //
 
@@ -93,16 +93,32 @@ class SiteController extends Controller {
 
 ### View ###
 
-    <div class="row">
-        {{ $status }}
+```<div class="row">
+    {{ $status }}
 
-        {{ $name }}
+    {{ $name }}
+</div>```
 
 
 
 ### HTML output ###
 
-the view will render HTML form fields prepopulated with previous post request or defined array elements.
+```<div class="row">
+    <div>
+        <select id="field-status" class="width100p" name="status" data-placeholder="">
+            <option selected="selected" value="active">Active</option>
+            <option value="pending">Pending</option>
+            <option value="suspended">Suspended</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class=" control-label">Name</label>
+        <div>
+            <input type="text" name="name" value="" class="form-control" />
+        </div>
+    </div>
+</div>```
 
 
 
