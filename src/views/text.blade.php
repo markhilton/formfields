@@ -1,4 +1,4 @@
-<div id="{{ $name }}" class="form-group @if (in_array($name, $failed)) has-error @endif" @if ($condition)style="display: none"@endif>
+<div id="field-{{ $name }}" class="form-group @if (in_array($name, $failed)) has-error @endif" @if ($condition)style="display: none"@endif>
     <label class="control-label">{{ $label }} @if ($tooltip)&nbsp; <i class="fa fa-question-circle tooltips" title="{{ $tooltip }}"></i>@endif</label>
 	<textarea class="form-control {{ $class }}" name="{{ $name }}" {!! $attr !!} rows="5">{{ $value }}</textarea>
 </div>

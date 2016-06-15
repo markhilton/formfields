@@ -75,7 +75,7 @@ class FormBuilder
 
 		if ($arg['condition']) 
 		{
-			JSqueue::push(\View::make('FormFields::condition', [ 
+			\jsQueue::push(\View::make('FormFields::condition', [ 
 				'name'      => $arg['name'],
 				'condition' => key($arg['condition']), 
 				'value'     => current($arg['condition']), 
@@ -94,7 +94,7 @@ class FormBuilder
 		$view = \View::make('FormFields::scripts')->nest('field', 'FormFields::'.$arg['type'], $arg);
 
     	// read everything queued by Blade @section and paste it into Smarty
-		JSqueue::push( trim(str_replace(['<script>', '</script>'], ['',''], $view)) );
+		\jsQueue::push( trim(str_replace(['<script>', '</script>'], ['',''], $view)) );
 
 
 	    return $view['field'];
