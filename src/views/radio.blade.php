@@ -8,7 +8,7 @@
 
 		@foreach ($choice as $key => $val)
 		<div class="rdio rdio-primary @if (is_numeric($inline)) col-md-{{ $inline }} @elseif ($inline) inline @endif">
-		    <input type="radio" name="{{ $name }}" value="{{ $key }}" id="radio-{{ $name }}-{{ $key }}" {{ $val }} />
+		    <input type="radio" name="{{ $name }}" value="{{ $key }}" id="radio-{{ $name }}-{{ $key }}" @if ((!is_null($value) and $key == $value) or $key == $placeholder) checked="true" @endif />
 		    <label for="radio-{{ $name }}-{{ $key }}">{{ $val }}</label>
 		</div>
 		@endforeach

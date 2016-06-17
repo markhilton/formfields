@@ -20,7 +20,8 @@ class FormBuilder
 
     	foreach ($fields as $field_name => $args) 
     	{
-    		$args['key'] = $field_name;
+    		$args['key']   = isset($args['name']) ? $args['name'] : $field_name;
+    		$args['value'] = isset($data[ $args['key'] ]) ? $data[ $args['key'] ] : null;
 
     		$params = self::validate($args);
 
@@ -34,24 +35,30 @@ class FormBuilder
     // validate arguments passed to the template
 	public static function validate($args)
 	{
-		$params['type'] 	 	= isset($args['type'])        ? $args['type']        : 'input';
-		$params['label'] 	 	= isset($args['label'])       ? $args['label']       : null;
-		$params['value'] 	 	= isset($args['value'])       ? $args['value']       : null;
-		$params['default'] 	 	= isset($args['default'])     ? $args['default']     : null;
-		$params['maxlength'] 	= isset($args['maxlength'])   ? $args['maxlength']   : null;
-		$params['condition'] 	= isset($args['condition'])   ? $args['condition']   : null;
-		$params['array']     	= isset($args['array'])       ? $args['array']       : null;
-		$params['inline']    	= isset($args['inline'])      ? $args['inline']      : null;
-		$params['rows']      	= isset($args['rows'])        ? $args['rows']        : 5;
-		$params['placeholder']  = isset($args['placeholder']) ? $args['placeholder'] : '';
-		$params['choice']    	= isset($args['choice'])      ? $args['choice']      : [];
-		$params['name']      	= isset($args['name'])        ? $args['name']        : $args['key'];
-		$params['position']  	= isset($args['position'])    ? $args['position']    : 'side';			// label position
-		$params['icon']      	= isset($args['icon'])        ? $args['icon']        : 'calendar';		// classes
-		$params['class']     	= isset($args['class'])       ? $args['class']       : '';				// classes
-		$params['disabled']  	= (isset($args['disabled']) and $args['disabled'] === true)   ? true                   : false;
+		$params['type'] 	 	= isset($args['type'])        ? $args['type']          : 'input';
+		$params['label'] 	 	= isset($args['label'])       ? $args['label']         : null;
+		$params['value'] 	 	= isset($args['value'])       ? $args['value']         : null;
+		$params['default'] 	 	= isset($args['default'])     ? $args['default']       : null;
+		$params['maxlength'] 	= isset($args['maxlength'])   ? $args['maxlength']     : null;
+		$params['condition'] 	= isset($args['condition'])   ? $args['condition']     : null;
+		$params['array']     	= isset($args['array'])       ? '['.$args['array'].']' : '';
+		$params['inline']    	= isset($args['inline'])      ? $args['inline']        : null;
+		$params['rows']      	= isset($args['rows'])        ? $args['rows']          : 5;
+		$params['placeholder']  = isset($args['placeholder']) ? $args['placeholder']   : '';
+		$params['choice']    	= isset($args['choice'])      ? $args['choice']        : [];
+		$params['name']      	= isset($args['name'])        ? $args['name']          : $args['key'];
+		$params['position']  	= isset($args['position'])    ? $args['position']      : 'side';		// label position
+		$params['left']      	= isset($args['left'])        ? $args['left']          : null;			// classes
+		$params['right']      	= isset($args['right'])       ? $args['right']         : null;			// classes
+		$params['mask']      	= isset($args['mask'])         ? $args['mask']         : null;			// classes
+		$params['class']     	= isset($args['class'])       ? $args['class']         : '';			// classes
+
+		// extra attributes
+		$params['disabled']  	= (isset($args['disabled']) and $args['disabled'] != false)   ? "true" : "false";
+		$params['readonly']  	= (isset($args['readonly']) and $args['readonly'] != false)   ? "true" : "false";
 
 		$params['tooltip']   	= (isset($args['tooltip'])  and trim($args['tooltip']) != '') ? trim($args['tooltip']) : null;
+
 
 		return $params;
 	}
@@ -62,11 +69,12 @@ class FormBuilder
 		$attr = [];
 
 		// map attributes applied to input field
-		$allowed = [ 'maxlength', 'disabled' ];
+		$allowed = [ 'maxlength', 'disabled', 'readonly' ];
 
 		foreach ($arg as $key => $val)
 		{
-			if (!in_array($key, $allowed)) continue;
+			if (!in_array($key, $allowed) or $val == "false") continue;
+
 			if ($val) $attr[ $key ] = '"'.(string) $val.'"';
 		}
 
@@ -82,9 +90,15 @@ class FormBuilder
 			]));
 		}
 
-		$arg['failed'] = (array) \Session::get('failed');
-		$arg['name']   = $arg['name'].($arg['array'] ? '['.$arg['array'].']' : '');
 
+		// multipe selection
+		if (in_array($arg['type'], [ 'checkbox' ]))
+		{
+			$arg['array'] = $arg['array'] ? '[' . $arg['array'] . ']' : '[]';
+		}
+
+
+		$arg['failed'] = (array) \Session::get('failed');
 
 
 		/*

@@ -1,4 +1,4 @@
-<div id="field-{{ $name }}" class="form-group @if (in_array($name, $failed)) has-error @endif @if ($position != 'top') row @endif">
+<div id="field-{{ $name }}" class="form-group @if (in_array($name, $failed)) has-error @endif @if ($position != 'top') row @endif" @if ($condition) style="display: none" @endif>
 	@if ($label)
 	<label class="control-label @if ($position == 'side') col-sm-4 @endif">
 		{{ $label }} 
