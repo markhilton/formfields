@@ -1,11 +1,13 @@
-<div class="form-group @if (in_array($name, $failed)) has-error @endif @if ($position != 'top') row @endif">
+<div id="field-{{ $name }}" class="form-group @if (in_array($name, $failed)) has-error @endif @if ($position != 'top') @endif" @if ($condition) style="display: none" @endif>
+	@if ($label)
 	<label class="control-label @if ($position == 'side') col-sm-4 @endif">
 		{{ $label }} 
-		@if ($tooltip) &nbsp; <i class="fa fa-question-circle tooltips" title="{{ $tooltip }}"></i> @endif
+		@if ($tooltip) <i class="fa fa-question-circle tooltips" title="{{ $tooltip }}"></i> @endif
 	</label>
+    @endif
 
     <div @if ($position == 'side') class="col-sm-8" @endif>
-		<select id="field-{{ $name }}" class="@if ($class) {{ $class }} @else width100p @endif" name="{{ $name }}" data-placeholder="{{ $value }}">
+		<select id="field-select-{{ $name }}" class="@if ($class) {{ $class }} @else width100p @endif" name="{{ $name }}" data-placeholder="{{ $value }}">
 			@foreach ($choice as $key => $val)
 			@if (is_null($value))
 				<option @if ($default == $key) selected="selected" @endif value="{{ $key }}">{{ $val }}</option>
@@ -23,6 +25,8 @@
 
 @push('script')
 <script>
-	jQuery('#field-{{ $name }}').select2();
+	jQuery('#field-select-{{ $name }}').select2({
+		minimumResultsForSearch: -1
+	});
 </script>
 @endpush

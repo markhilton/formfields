@@ -135,13 +135,13 @@ Queue for linked and inline javascripts inside view template
 
 
 ### Controller
-  - **JSqueue::push('[javascript code]');** to push javascripts code to the queue
-  - **JSqueue::link('[javascript file]');** to add linked javascripts files
+  - **jsQueue::push('[javascript code]');** to push javascripts code to the queue
+  - **jsQueue::link('[javascript file]');** to add linked javascripts files
 
 
 ### View
 
-add **{{ JSqueue::render() }}** call
+add **{{ jsQueue::render() }}** call
 in template header or footer in order to render queued javascripts
 
 
