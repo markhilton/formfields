@@ -1,19 +1,28 @@
-<div class="form-group @if (in_array($name, $failed)) has-error @endif" @if ($condition)style="display: none"@endif>
-    <label class="@if ($position == 'side') col-sm-4 @endif control-label">{{ $label }} @if ($tooltip)&nbsp; <i class="fa fa-question-circle tooltips" title="{{ $tooltip }}"></i>@endif</label>
-    <div class="input-group @if ($position == 'side') col-sm-8 @endif">
-    	<span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-        <input id="field-{{ $name }}" type="text" name="{{ $name }}" value="{{ $value }}" class="form-control {{ $class }}" {!! $attr !!} />
+<div id="field-{{ $name }}" class="form-group @if (in_array($name, $failed)) has-error @endif" @if ($condition) style="display: none" @endif>
+    @if ($label)
+    <label class="@if ($position == 'side') col-sm-4 @endif control-label">
+    	{{ $label }} 
+    	@if ($tooltip) <i class="fa fa-question-circle tooltips" title="{{ $tooltip }}"></i>@endif
+    </label>
+    @endif
+
+    <div @if ($position == 'side') class="col-sm-8" @endif>
+        <input id="field-input-{{ $name }}" type="tel" name="{{ $name }}" value="{{ $value }}" placeholder="{{ $placeholder }}" class="form-control {{ $class }}" {!! $attr !!} />
     </div>
 </div>
 
 
 
+<link href="/chain/css/intlTelInput.css" rel="stylesheet">
 
 
 @push('script')
 <script>
-	jQuery("#field-{{ $name }}").mask("999-99-9999");
+	// http://www.jqueryscript.net/form/jQuery-International-Telephone-Input-With-Flags-Dial-Codes.html
+	jQuery('#field-input-{{ $name }}').intlTelInput({
+		preferredCountries: [ "us", "ca", "gb" ],
+	});
 </script>
 
-{{ \JSqueue::link('jquery.maskedinput.min.js') }}
+{{ \jsQueue::link('intlTelInput.js') }}
 @endpush
