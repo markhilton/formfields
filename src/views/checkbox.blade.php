@@ -10,7 +10,8 @@
 
 		@foreach ($choice as $key => $val)
 		<div class="ckbox ckbox-default @if (is_numeric($inline)) col-md-{{ $inline }} @elseif ($inline) {{ $inline }} @endif">
-		    <input type="checkbox" name="{{ $name }}{{ $array }}" value="{{ $key }}" id="checkbox-{{ $name }}-{{ $key }}" @if (is_array($value) and in_array($key, $value)) checked="true" @endif />
+		    <input type="checkbox" name="{{ $name }}{{ $array }}" value="{{ $key }}" id="checkbox-{{ $name }}-{{ $key }}" 
+		    @if (is_array($value) and in_array($key, $value)) checked="true" @endif />
 		    <label for="checkbox-{{ $name }}-{{ $key }}">{{ $val }}</label> 
 		</div>
 		@endforeach

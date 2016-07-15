@@ -6,7 +6,7 @@
     </label>
     @endif
     
-    <div @if ($position == 'side') class="col-sm-8" @endif>
+    <div @if (!$placeholder and $position != 'top') class="col-sm-8" @endif>
         <input type="text" name="{{ $name }}" value="{{ $value }}" placeholder="{{ $placeholder }}" class="form-control {{ $class }}" {!! $attr !!} />
     </div>
 </div>

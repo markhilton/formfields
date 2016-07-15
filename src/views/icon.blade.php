@@ -6,7 +6,7 @@
     </label>
     @endif
     
-    <div class="input-group @if ($position == 'side') col-sm-8 @endif ">
+    <div class="input-group @if ($position == 'side') col-sm-8 @endif mb15">
     @if ($left)
     	<span class="input-group-addon">{{ $left }}</span>
     @endif
