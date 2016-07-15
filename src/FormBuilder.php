@@ -37,7 +37,7 @@ class FormBuilder
 	{
 		$params['type'] 	 	= isset($args['type'])        ? $args['type']          : 'input';
 		$params['label'] 	 	= isset($args['label'])       ? $args['label']         : null;
-		$params['value'] 	 	= isset($args['value'])       ? $args['value']         : null;
+		$params['value'] 	 	= isset($args['value'])       ? $args['value']         : (isset($args['default']) ? $args['default'] : null);
 		$params['default'] 	 	= isset($args['default'])     ? $args['default']       : null;
 		$params['maxlength'] 	= isset($args['maxlength'])   ? $args['maxlength']     : null;
 		$params['condition'] 	= isset($args['condition'])   ? $args['condition']     : null;
@@ -105,7 +105,11 @@ class FormBuilder
 		 * render field HTML
 		 *
 		 */
-		$view = \View::make('FormFields::scripts')->nest('field', 'FormFields::'.$arg['type'], $arg);
+		if (view()->exists('vendor.markhilton.formfields.'.$arg['type'])) {
+			$view = \View::make('FormFields::scripts')->nest('field', 'vendor.markhilton.formfields.'.$arg['type'], $arg);
+		} else {
+			$view = \View::make('FormFields::scripts')->nest('field', 'FormFields::'.$arg['type'], $arg);	
+		}
 
     	// read everything queued by Blade @section and paste it into Smarty
 		\jsQueue::push( trim(str_replace(['<script>', '</script>'], ['',''], $view)) );
